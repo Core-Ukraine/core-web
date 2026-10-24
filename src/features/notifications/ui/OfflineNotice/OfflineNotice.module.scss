@@ -1,0 +1,42 @@
+@use "@/shared/styles/mixins" as *;
+
+// A live region that never leaves the page, so going offline is announced
+.region {
+  position: fixed;
+  inset-block-end: max(1rem, env(safe-area-inset-bottom));
+  inset-inline-start: 50%;
+  z-index: 40;
+  inline-size: max-content;
+  max-inline-size: calc(100vw - 2 * var(--gutter));
+  translate: -50% 0;
+
+  @include hide-in-print;
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.125rem;
+  border: 1px solid var(--color-line-panel);
+  border-radius: var(--radius-lg);
+  background: var(--color-panel);
+  box-shadow: var(--shadow-panel);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  animation: rise var(--duration-base) var(--ease-out);
+
+  > svg {
+    flex: none;
+    color: var(--color-red);
+  }
+}
+
+// The notice rises into view
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 1rem;
+  }
+}

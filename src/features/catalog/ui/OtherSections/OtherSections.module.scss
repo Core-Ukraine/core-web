@@ -1,0 +1,67 @@
+@use "@/shared/styles/mixins" as *;
+
+.other {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @include hide-in-print;
+}
+
+.title {
+  @include eyebrow(0.75rem);
+
+  color: var(--color-text-muted);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// A compact row: the number, the name and an arrow that leans forward
+.link {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  min-block-size: 3.5rem;
+  padding: 0.875rem 1.25rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+  transition:
+    border-color var(--duration-base) ease,
+    background-color var(--duration-base) ease;
+
+  @include hover {
+    border-color: var(--color-line-panel);
+    background: var(--color-panel);
+    color: var(--color-heading);
+
+    .arrow {
+      translate: 0.25rem 0;
+    }
+  }
+}
+
+.number {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.name {
+  flex: 1;
+  font-weight: 600;
+}
+
+.arrow {
+  color: var(--color-red);
+  transition: translate var(--duration-base) var(--ease-out);
+}

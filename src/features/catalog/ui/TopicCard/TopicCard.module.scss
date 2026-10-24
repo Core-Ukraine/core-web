@@ -1,0 +1,89 @@
+@use "@/shared/styles/mixins" as *;
+
+// The whole card is a link, so it lifts a little under the pointer
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  block-size: 100%;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, var(--color-highlight), transparent 6rem), var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+  transition:
+    border-color var(--duration-base) ease,
+    box-shadow var(--duration-base) var(--ease-out),
+    translate var(--duration-base) var(--ease-out);
+
+  @include hover {
+    border-color: var(--color-line-panel);
+    box-shadow: var(--shadow-card);
+    translate: 0 -0.1875rem;
+
+    .title {
+      color: var(--color-accent);
+    }
+
+    .arrow {
+      translate: 0.25rem 0;
+    }
+  }
+
+  &:active {
+    translate: 0 0;
+  }
+}
+
+// The number with a thin line after it, like a callout on a drawing
+.number {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+
+  &::after {
+    content: "";
+    flex: 1;
+    block-size: 1px;
+    background: linear-gradient(90deg, currentcolor, transparent);
+    opacity: 0.35;
+  }
+}
+
+.title {
+  @include display(1.375rem);
+
+  transition: color var(--duration-fast) ease;
+}
+
+.summary {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+// Read more, pushed to the bottom of the card
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-block-start: auto;
+  padding-block-start: 0.75rem;
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.arrow {
+  color: var(--color-red);
+  transition: translate var(--duration-base) var(--ease-out);
+
+  @media (forced-colors: active) {
+    color: LinkText;
+  }
+}

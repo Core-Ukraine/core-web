@@ -1,0 +1,54 @@
+name: 🐞 Bug report
+description: Something does not work as expected
+title: "🐞 "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report a problem! Please check the existing issues first.
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 What happened?
+      description: A clear description of the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 🔁 Steps to reproduce
+      placeholder: |
+        1. Open the menu on a phone
+        2. Unfold Реактори and tap ВВЕР-1000
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ Expected behaviour
+    validations:
+      required: true
+  - type: input
+    id: address
+    attributes:
+      label: 📍 Page address
+      description: The address of the page where it happened.
+      placeholder: /reaktory/vver-1000
+  - type: input
+    id: version
+    attributes:
+      label: 🏷️ Version
+      description: Shown at the bottom of every page.
+      placeholder: v1.0.0
+  - type: input
+    id: environment
+    attributes:
+      label: 💻 Browser and device
+      placeholder: Chrome 140 on macOS 26, Safari on iPhone 17…
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: 📎 Screenshots or extra context

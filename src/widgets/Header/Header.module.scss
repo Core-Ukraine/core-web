@@ -1,0 +1,72 @@
+@use "@/shared/styles/mixins" as *;
+
+// Stays at the top while the page scrolls; a solid bar, cheap to repaint on any device
+.header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 30;
+  border-block-end: 1px solid var(--color-line-header);
+  background: var(--color-bg);
+
+  // A soft shadow appears once the page moves under the bar
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: lift linear both;
+      animation-range: 0 6rem;
+      animation-timeline: scroll(root block);
+    }
+  }
+
+  @media print {
+    position: static;
+  }
+}
+
+// The shadow under the bar grows with the first steps of scrolling
+@keyframes lift {
+  to {
+    box-shadow: 0 12px 32px -16px rgb(0 0 0 / 0.7);
+  }
+}
+
+.bar {
+  @include container;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  min-block-size: var(--header-height);
+  padding-block: 0.5rem;
+
+  @include from("lg") {
+    padding-block: 0.875rem;
+  }
+}
+
+.brand {
+  display: flex;
+  flex: none;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+
+  // The mark turns a little under the pointer, like a part on a turntable
+  svg {
+    transition: rotate var(--duration-slow) var(--ease-out);
+  }
+
+  @include hover {
+    svg {
+      rotate: 60deg;
+    }
+  }
+}
+
+// The full bar only where it fits
+.nav {
+  @include below("lg") {
+    display: none;
+  }
+
+  @include hide-in-print;
+}

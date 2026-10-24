@@ -1,0 +1,203 @@
+@use "@/shared/styles/mixins" as *;
+
+// Plain words in a row, without frames or lines
+.list {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  position: relative;
+}
+
+// The buttons and links of the bar: text that brightens on a soft pill
+%entry {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  block-size: 2.5rem;
+  padding: 0 0.875rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text-soft);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--duration-fast) ease,
+    color var(--duration-fast) ease;
+
+  @include hover {
+    background: rgb(255 255 255 / 0.05);
+    color: var(--color-heading);
+  }
+
+  @media (forced-colors: active) {
+    border: 1px solid transparent;
+  }
+}
+
+.button {
+  @extend %entry;
+
+  cursor: pointer;
+
+  // The section of the current page is simply brighter
+  &[data-current] {
+    color: var(--color-heading);
+  }
+
+  // The open list keeps the pill and turns its chevron up
+  &[aria-expanded="true"] {
+    background: rgb(255 255 255 / 0.07);
+    color: var(--color-heading);
+
+    .chevron {
+      opacity: 1;
+      rotate: 180deg;
+    }
+
+    @media (forced-colors: active) {
+      border-color: Highlight;
+    }
+  }
+}
+
+.link {
+  @extend %entry;
+
+  &[aria-current="page"] {
+    color: var(--color-heading);
+  }
+}
+
+.chevron {
+  opacity: 0.6;
+  transition:
+    rotate var(--duration-base) var(--ease-out),
+    opacity var(--duration-fast) ease;
+
+  .button:hover & {
+    opacity: 1;
+  }
+}
+
+.panel {
+  position: absolute;
+  inset-block-start: calc(100% + 0.625rem);
+  inset-inline-start: 0;
+  z-index: 40;
+  inline-size: 21.25rem;
+  padding: 0.5rem;
+  border: 1px solid var(--color-line-panel);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--color-highlight), transparent 3rem), var(--color-panel);
+  box-shadow: var(--shadow-panel);
+  // Slides in and out under its button, display included where browsers allow
+  transition-behavior: allow-discrete;
+  transition-duration: var(--duration-base);
+  transition-property: opacity, translate, display;
+  transition-timing-function: var(--ease-out);
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 -0.375rem;
+  }
+
+  &[hidden] {
+    display: none;
+    opacity: 0;
+    translate: 0 -0.375rem;
+  }
+
+  // The last list lines up with the right edge of its button
+  &[data-align="end"] {
+    inset-inline: auto 0;
+  }
+}
+
+.label {
+  margin: 0;
+  padding: 0.625rem 0.75rem 0.5rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// A topic with its description, and an arrow that slides in under the pointer
+.option {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 0.75rem;
+  row-gap: 0.1875rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: background-color var(--duration-fast) ease;
+
+  @include hover {
+    background: var(--color-hover-panel);
+    color: var(--color-heading);
+
+    .optionArrow {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  &:focus-visible .optionArrow {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  &[aria-current="page"] {
+    background: var(--color-hover-panel);
+  }
+}
+
+.optionArrow {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  color: var(--color-red);
+  opacity: 0;
+  translate: -0.375rem 0;
+  transition:
+    opacity var(--duration-fast) ease,
+    translate var(--duration-base) var(--ease-out);
+}
+
+.optionTitle {
+  grid-column: 1;
+
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.optionSummary {
+  grid-column: 1;
+
+  color: var(--color-text-soft);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}

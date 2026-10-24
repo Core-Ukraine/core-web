@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  outline: none;
+}
+
+// The page inside, which fades in when the address changes
+.page {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}

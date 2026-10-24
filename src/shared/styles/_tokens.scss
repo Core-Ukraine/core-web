@@ -1,0 +1,95 @@
+// The dark palette built on the ES Group blue and red, see docs/design.md
+@mixin colors {
+  color-scheme: dark;
+
+  // Backgrounds from the page to the footer
+  --color-bg: #0b1424;
+  --color-bg-deep: #0e1a2e;
+  --color-bg-footer: #070f1c;
+  --color-surface: #111e33;
+  --color-panel: #13223c;
+
+  // Lines and borders
+  --color-line: #22355a;
+  --color-line-header: #1c2c48;
+  --color-line-panel: #2a3f66;
+
+  // Brand colours: blue for fills, red for actions and active states
+  --color-blue: #1d488c;
+  --color-red: #e30220;
+  --color-red-hover: #c4021c;
+  --color-accent: #7fa6e6;
+
+  // Text from headings to quiet labels
+  --color-heading: #ffffff;
+  --color-text: #f2f5fa;
+  --color-text-body: #c3cfe0;
+  --color-text-soft: #a9b8cf;
+  --color-text-muted: #8c9db8;
+
+  // Hover backgrounds of the menu and the light button
+  --color-hover: #172846;
+  --color-hover-panel: #1d2f52;
+  --color-light: #ffffff;
+  --color-light-hover: #e2eaf7;
+
+  // Text on the blue news card
+  --color-on-blue-label: #c9d6ec;
+  --color-on-blue-text: #dce5f3;
+
+  --color-focus: #7fa6e6;
+  --color-grid: rgb(127 166 230 / 0.07);
+
+  // Glows, highlights and shadows that give the dark surfaces depth
+  --color-glow-blue: rgb(41 98 186 / 0.32);
+  --color-glow-red: rgb(227 2 32 / 0.45);
+  --color-highlight: rgb(255 255 255 / 0.05);
+  --shadow-panel: 0 24px 48px -12px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(0 0 0 / 0.2);
+  --shadow-card: 0 24px 48px -24px rgb(0 0 0 / 0.7);
+}
+
+// Dark text on white paper for printing
+@mixin print {
+  color-scheme: light;
+
+  --color-bg: #ffffff;
+  --color-bg-deep: #ffffff;
+  --color-bg-footer: #ffffff;
+  --color-surface: #ffffff;
+  --color-line: #c3cfe0;
+  --color-line-header: #c3cfe0;
+  --color-accent: #1d488c;
+  --color-heading: #070f1c;
+  --color-text: #070f1c;
+  --color-text-body: #1c2c48;
+  --color-text-soft: #22355a;
+  --color-text-muted: #22355a;
+  --color-grid: transparent;
+}
+
+// Fonts, radii, motion and layout
+@mixin shared {
+  --font-display: var(--font-unbounded-cyrillic), var(--font-unbounded-latin), "Arial Black", sans-serif;
+  --font-sans: var(--font-montserrat), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-martian-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1rem;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 160ms;
+  --duration-base: 260ms;
+  --duration-slow: 700ms;
+
+  --layout-width: 75rem;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  // Side gutters that keep clear of the notch in landscape
+  --gutter-left: max(var(--gutter), env(safe-area-inset-left));
+  --gutter-right: max(var(--gutter), env(safe-area-inset-right));
+  --header-height: 4rem;
+  // The sticky header plus some air, for anchors and sticky columns
+  --header-offset: 5.5rem;
+  --section-space: clamp(4.5rem, 9vw, 7rem);
+}

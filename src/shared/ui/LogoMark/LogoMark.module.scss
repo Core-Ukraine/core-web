@@ -1,0 +1,8 @@
+// The red central tube, which keeps its meaning in forced colours
+.core {
+  fill: var(--color-red);
+
+  @media (forced-colors: active) {
+    fill: CanvasText;
+  }
+}

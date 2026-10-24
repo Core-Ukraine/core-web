@@ -1,0 +1,76 @@
+@use "@/shared/styles/mixins" as *;
+
+@include motion-keyframes;
+
+// The grid of a drawing with a blue light behind the assembly
+.hero {
+  @include blueprint(78% 45%);
+
+  overflow: clip;
+}
+
+.inner {
+  @include container;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3.5rem 4rem;
+  padding-block: clamp(3rem, 7vw, 6rem) clamp(3.5rem, 7.5vw, 6.5rem);
+}
+
+.copy {
+  display: flex;
+  flex: 1 1 30rem;
+  flex-direction: column;
+  gap: 1.75rem;
+  min-inline-size: 0;
+}
+
+// The lead and the buttons rise in; the title, the largest paint, shows at once
+.title {
+  @include display(clamp(1.875rem, 1rem + 3.4vw, 3.25rem));
+
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+// The lead with the red line on its left, a touch taken from ES Group
+.lead {
+  max-inline-size: 35rem;
+  margin: 0;
+  padding-inline-start: 1.25rem;
+  border-inline-start: 3px solid var(--color-red);
+  color: var(--color-text-body);
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  line-height: 1.6;
+
+  @include enter(120ms);
+}
+
+.actions {
+  @include enter(180ms);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-block-start: 0.25rem;
+
+  // Full-width buttons, one under the other, on phones
+  @include below("md") {
+    flex-direction: column;
+
+    > a {
+      inline-size: 100%;
+    }
+  }
+}
+
+.figure {
+  flex: 1 1 26.25rem;
+
+  // A smaller drawing on phones
+  @include below("md") {
+    padding-inline: 1.5rem;
+  }
+}

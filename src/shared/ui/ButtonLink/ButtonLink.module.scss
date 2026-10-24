@@ -1,0 +1,16 @@
+@use "@/shared/styles/mixins" as *;
+
+.primary {
+  @include button("primary");
+}
+
+.light {
+  @include button("light");
+}
+
+// The smaller button inside a card
+.compact {
+  min-block-size: 3rem;
+  padding-inline: 1.25rem;
+  font-size: 0.9375rem;
+}

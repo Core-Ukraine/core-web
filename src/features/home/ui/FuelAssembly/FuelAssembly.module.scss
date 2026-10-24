@@ -1,0 +1,189 @@
+@use "@/shared/styles/mixins" as *;
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.375rem;
+  min-inline-size: 0;
+  margin: 0;
+}
+
+.drawing {
+  inline-size: 100%;
+  max-inline-size: 30rem;
+  block-size: auto;
+}
+
+// Dashed centre lines and the dashed outline around the assembly
+.axis {
+  stroke: var(--color-line);
+  stroke-dasharray: 2 6;
+  stroke-width: 1;
+}
+
+.envelope {
+  fill: none;
+  stroke: var(--color-line);
+  stroke-dasharray: 6 6;
+  stroke-width: 1.5;
+}
+
+.body {
+  fill: var(--color-surface);
+  stroke: var(--color-accent);
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+// Fuel rods in brand blue, guide channels as red rings, the red central tube
+.rod {
+  fill: var(--color-blue);
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
+}
+
+.guide {
+  fill: var(--color-bg);
+  stroke: var(--color-red);
+  stroke-width: 2;
+}
+
+.centre {
+  fill: var(--color-red);
+}
+
+// The width across flats, drawn like a dimension on a drawing
+.dimension {
+  stroke: var(--color-accent);
+  stroke-width: 1;
+}
+
+.size {
+  fill: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+  text-align: center;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.625rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  color: var(--color-text-body);
+  font-size: 0.875rem;
+  list-style: none;
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.swatch {
+  flex: none;
+}
+
+.title {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+// The rods appear ring by ring from the centre when the page opens
+@media (prefers-reduced-motion: no-preference) {
+  .drawing [data-ring] {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: rod-in 480ms var(--ease-out) both;
+  }
+
+  @for $ring from 0 through 5 {
+    .drawing [data-ring="#{$ring}"] {
+      animation-delay: #{100 + $ring * 70}ms;
+    }
+  }
+
+  .body,
+  .envelope,
+  .dimension,
+  .size {
+    animation: fade-in 900ms var(--ease-out) both;
+  }
+}
+
+// A rod grows into its place
+@keyframes rod-in {
+  from {
+    opacity: 0;
+    scale: 0.3;
+  }
+}
+
+// The lines of the drawing fade in
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+// Pointing at a legend entry brings its rods forward and dims the rest
+.rod,
+.guide,
+.centre {
+  transition: opacity var(--duration-base) ease;
+}
+
+.entry {
+  cursor: default;
+  transition: color var(--duration-fast) ease;
+}
+
+@each $kind in rod, guide, centre {
+  .figure:has(.entry[data-kind="#{$kind}"]:hover) {
+    .rod,
+    .guide,
+    .centre {
+      opacity: 0.18;
+    }
+
+    .#{$kind} {
+      opacity: 1;
+    }
+
+    .entry[data-kind="#{$kind}"] {
+      color: var(--color-heading);
+    }
+  }
+}
+
+// Shapes keep their meaning in forced colours
+@media (forced-colors: active) {
+  .rod,
+  .body {
+    fill: Canvas;
+    stroke: CanvasText;
+  }
+
+  .guide {
+    fill: Canvas;
+    stroke: Highlight;
+  }
+
+  .centre {
+    fill: Highlight;
+  }
+}

@@ -1,0 +1,220 @@
+@use "@/shared/styles/mixins" as *;
+
+// The phone menu disappears once the full bar fits
+.root {
+  display: flex;
+
+  @include from("lg") {
+    display: none;
+  }
+
+  @include hide-in-print;
+}
+
+// A square button that holds the burger or the cross
+.toggle {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 3rem;
+  block-size: 3rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-hover);
+  color: var(--color-heading);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) ease;
+
+  @include hover {
+    background: var(--color-hover-panel);
+  }
+
+  @media (forced-colors: active) {
+    border: 1px solid ButtonText;
+  }
+}
+
+// The menu covers the whole screen and fades in and out, display included
+.dialog {
+  position: fixed;
+  inset: 0;
+  inline-size: 100%;
+  max-inline-size: none;
+  block-size: 100dvh;
+  max-block-size: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  opacity: 0;
+  transition-behavior: allow-discrete;
+  transition-duration: var(--duration-base);
+  transition-property: opacity, display, overlay;
+  transition-timing-function: var(--ease-out);
+
+  &[open] {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  &::backdrop {
+    background: var(--color-bg);
+  }
+}
+
+// The rows slide in one after another as the menu opens
+@keyframes row-in {
+  from {
+    opacity: 0;
+    translate: 0 0.375rem;
+  }
+}
+
+// The same bar as the header, so the cross takes the place of the burger
+.top {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-block-size: var(--header-height);
+  padding: 0.5rem var(--gutter-right) 0.5rem var(--gutter-left);
+  border-block-end: 1px solid var(--color-line-header);
+}
+
+.brand {
+  display: flex;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.nav {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-inline: var(--gutter-left) var(--gutter-right);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  border-block-end: 1px solid var(--color-line-header);
+
+  @media (prefers-reduced-motion: no-preference) {
+    .dialog[open] & {
+      animation: row-in 420ms var(--ease-out) both;
+    }
+
+    @for $row from 1 through 8 {
+      .dialog[open] &:nth-child(#{$row}) {
+        animation-delay: #{$row * 25}ms;
+      }
+    }
+  }
+}
+
+// A row that opens a list or a page
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  inline-size: 100%;
+  min-block-size: 3.75rem;
+  padding: 0.75rem 0;
+  border: 0;
+  background: none;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+
+  // The open section turns light blue and its chevron points up
+  &[aria-expanded="true"] {
+    color: var(--color-accent);
+
+    .chevron {
+      rotate: 180deg;
+    }
+  }
+
+  &[aria-current="page"] {
+    color: var(--color-accent);
+  }
+}
+
+.chevron {
+  flex: none;
+  color: var(--color-text);
+  transition: rotate var(--duration-base) var(--ease-out);
+}
+
+// The topics of a section unfold to their own height
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--duration-base) var(--ease-out),
+    opacity var(--duration-base) ease;
+
+  &[data-open] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+}
+
+.sublist {
+  min-block-size: 0;
+  margin: 0;
+  padding: 0 0 0 1rem;
+  overflow: hidden;
+  list-style: none;
+
+  > li:last-child {
+    padding-block-end: 0.75rem;
+  }
+}
+
+.sublink {
+  display: flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  padding-block: 0.5rem;
+  color: var(--color-text-body);
+  font-size: 1.0625rem;
+  line-height: 1.35;
+  text-decoration: none;
+
+  @include hover {
+    color: var(--color-heading);
+  }
+
+  &[aria-current="page"] {
+    color: var(--color-heading);
+    font-weight: 600;
+  }
+}
+
+.copyright {
+  flex: none;
+  margin: 0;
+  padding: 1.25rem var(--gutter-right) max(1.25rem, env(safe-area-inset-bottom)) var(--gutter-left);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}

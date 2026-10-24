@@ -1,0 +1,119 @@
+@use "@/shared/styles/mixins" as *;
+
+.banner {
+  background: var(--color-bg);
+}
+
+// Right under the sections, on the same background
+.inner {
+  @include container;
+
+  padding-block: 0 var(--section-space);
+}
+
+// The brand blue with a large hexagon, the only filled block of the page
+.card {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: end;
+  gap: 1.5rem 3rem;
+  padding: clamp(1.75rem, 4vw, 3rem);
+  overflow: hidden;
+  border: 1px solid #2a5aa6;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, #2557a5 0%, var(--color-blue) 50%, #183d78 100%);
+
+  @include from("lg") {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block: -5rem;
+    inset-inline-end: -8rem;
+    z-index: -1;
+    aspect-ratio: 1;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpolygon points='38,20 29,35.6 11,35.6 2,20 11,4.4 29,4.4' fill='none' stroke='white' stroke-width='0.6' stroke-linejoin='round'/%3E%3Ccircle cx='20' cy='20' r='3.4' fill='none' stroke='white' stroke-width='0.6'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  @media print {
+    border-color: var(--color-line);
+    background: none;
+  }
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-inline-size: 38rem;
+}
+
+.eyebrow {
+  @include eyebrow;
+
+  color: var(--color-on-blue-label);
+}
+
+.title {
+  @include display(clamp(1.5rem, 1rem + 1.6vw, 2rem));
+}
+
+.text {
+  margin: 0;
+  color: var(--color-on-blue-text);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+// The latest news in a row under the text
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 0.75rem;
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  block-size: 100%;
+  padding: 1rem 1.125rem;
+  border-radius: var(--radius-lg);
+  background: rgb(7 15 28 / 0.25);
+  color: #ffffff;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) ease;
+
+  > time {
+    color: var(--color-on-blue-label);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 400;
+  }
+
+  @include hover {
+    background: rgb(7 15 28 / 0.4);
+    color: #ffffff;
+  }
+}
+
+.button {
+  justify-self: start;
+
+  @include from("lg") {
+    grid-row: 1;
+    grid-column: 2;
+  }
+}

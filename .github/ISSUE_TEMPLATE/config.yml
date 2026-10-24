@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🛡️ Report a security vulnerability
+    url: https://github.com/Core-Ukraine/core-web/security/advisories/new
+    about: Please report security problems privately.
+  - name: 📚 Read the documentation
+    url: https://github.com/Core-Ukraine/core-web/tree/main/docs
+    about: Guides for content, architecture, design and contributing.

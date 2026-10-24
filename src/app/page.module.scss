@@ -1,0 +1,8 @@
+@use "@/shared/styles/mixins" as *;
+
+// The content of a page under its header
+.body {
+  @include container;
+
+  padding-block: clamp(3rem, 6vw, 4.5rem) var(--section-space);
+}
