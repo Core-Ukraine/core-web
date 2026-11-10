@@ -4,6 +4,8 @@ All notable changes to Core Web are documented here. The format follows [Keep a 
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-10
+
 ### Added
 
 - ⚛️ The AP-1000 topic as a mini course of nine modules: key figures under the title, the design, the working principle, the safety systems, the history, the units in the world, videos, numbered sources and a test of eight questions; twelve NRC drawings that open full size, simplified schemes with moving flows, a list of equipment to pick from and six accident scenarios, with the module being read marked in a list beside the course or in a band on a phone.
@@ -33,5 +35,6 @@ The first release.
 - 🪝 Git hooks and CI checks for formatting, one-line comments, em and en dashes, Conventional Commits and pull request titles.
 - 🛠️ A Makefile with a coloured, grouped `make help`: setup, the dev server, checks, end-to-end tests, every Docker environment and a comparison of the files shared with the sibling apps.
 
-[Unreleased]: https://github.com/Core-Ukraine/core-web/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/Core-Ukraine/core-web/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/Core-Ukraine/core-web/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Core-Ukraine/core-web/releases/tag/v1.0.0

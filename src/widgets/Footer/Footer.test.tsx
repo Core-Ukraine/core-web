@@ -29,7 +29,7 @@ describe("Footer", () => {
     expect(screen.getByRole("contentinfo")).toHaveTextContent(
       `© ${new Date().getFullYear()} ЯДРО · Освітній проєкт про атомну енергетику`,
     );
-    expect(screen.getByText("v1.0.0")).toBeInTheDocument();
+    expect(screen.getByText("v1.1.0")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Вгору" })).toHaveAttribute("href", "#top");
   });
 });

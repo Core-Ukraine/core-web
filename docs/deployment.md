@@ -150,7 +150,7 @@ make status                  # which environments are running
 Every release also publishes the production image to GitHub Packages, for amd64 and arm64, with build provenance and an SBOM:
 
 ```bash
-docker run --rm --publish 3000:3000 ghcr.io/core-ukraine/core-web:1.0.0
+docker run --rm --publish 3000:3000 ghcr.io/core-ukraine/core-web:1.1.0
 ```
 
 The image is built with `APP_ENV=production` and the `SITE_URL` variable of the repository. GitHub Packages names images in lowercase, so the release workflow publishes `ghcr.io/core-ukraine/core-web`.
