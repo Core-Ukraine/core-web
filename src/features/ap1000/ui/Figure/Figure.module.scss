@@ -1,0 +1,70 @@
+@use "@/shared/styles/mixins" as *;
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  min-inline-size: 0;
+  margin: 0;
+}
+
+// Black lines on white paper take the colour of the sheet under them
+.image {
+  inline-size: auto;
+  max-inline-size: 100%;
+  block-size: auto;
+  max-block-size: min(80svh, 54rem);
+  margin-inline: auto;
+  mix-blend-mode: multiply;
+
+  .figure[data-size="half"] & {
+    max-block-size: 34rem;
+  }
+
+  .figure[data-size="small"] & {
+    max-block-size: 18.75rem;
+  }
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  max-inline-size: 45rem;
+  color: var(--color-text-soft);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+
+  .figure[data-size="small"] & {
+    font-size: 0.875rem;
+  }
+}
+
+.title {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+// The English labels of the drawing with their meaning
+.terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+
+.pair {
+  min-inline-size: 0;
+}
+
+.term {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.8125em;
+}
+
+.source {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+}

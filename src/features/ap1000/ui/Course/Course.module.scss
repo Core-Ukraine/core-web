@@ -1,0 +1,94 @@
+@use "@/shared/styles/mixins" as *;
+
+// The modules on the left and their list on the right, as on the other topics
+.course {
+  @include container;
+
+  padding-block: 0 var(--section-space);
+
+  // A plain column on a phone, so the band of modules sticks through the whole course
+  @include from("lg") {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 16.5rem;
+    align-items: start;
+    gap: 4rem;
+    padding-block-start: clamp(3rem, 6vw, 4.5rem);
+  }
+}
+
+// The list stays in view: beside the course, or as a band under the header
+.aside {
+  position: sticky;
+  z-index: 20;
+
+  @include from("lg") {
+    grid-column: 2;
+    grid-row: 1;
+    inset-block-start: var(--header-offset);
+  }
+
+  @include below("lg") {
+    inset-block-start: var(--header-height);
+    margin-inline: calc(-1 * var(--gutter-left)) calc(-1 * var(--gutter-right));
+    margin-block-end: 2rem;
+    padding-inline: var(--gutter-left) var(--gutter-right);
+    border-block-end: 1px solid var(--color-line-header);
+    background: var(--color-bg);
+  }
+
+  @include hide-in-print;
+}
+
+// Wide parts of a module measure themselves against this column
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 8vw, 6rem);
+  min-inline-size: 0;
+  container: course / inline-size;
+
+  @include from("lg") {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+
+.module {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  scroll-margin-block-start: 4rem;
+
+  @include from("lg") {
+    scroll-margin-block-start: 0;
+  }
+}
+
+// The number of the module with a fading line, then its name
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.number {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+
+  &::after {
+    content: "";
+    flex: 1;
+    block-size: 1px;
+    background: linear-gradient(90deg, currentcolor, transparent);
+    opacity: 0.35;
+  }
+}
+
+.title {
+  @include display(clamp(1.625rem, 1.1rem + 2vw, 2.25rem));
+}

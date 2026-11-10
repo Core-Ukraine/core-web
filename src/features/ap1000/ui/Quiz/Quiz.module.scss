@@ -1,0 +1,141 @@
+@use "@/shared/styles/mixins" as *;
+
+.quiz {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  min-inline-size: 0;
+  margin: 0;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, var(--color-highlight), transparent 6rem), var(--color-surface);
+}
+
+// The number of the question, like the number of a card
+.count {
+  float: inline-start;
+  inline-size: 100%;
+  margin-block-end: 0.875rem;
+  padding: 0;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+
+  & + * {
+    clear: both;
+  }
+}
+
+.text {
+  color: var(--color-heading);
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+// An answer to pick; once picked, the right one turns green and a wrong one coral
+.option {
+  min-block-size: 2.75rem;
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--color-line-panel);
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--color-text-body);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  text-align: start;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease,
+    color var(--duration-fast) ease;
+
+  @include hover {
+    border-color: var(--color-accent);
+    color: var(--color-heading);
+  }
+
+  &[aria-disabled="true"] {
+    cursor: default;
+  }
+
+  &[aria-disabled="true"]:hover {
+    border-color: var(--color-line-panel);
+    color: var(--color-text-body);
+  }
+
+  &[data-state="right"],
+  &[data-state="right"]:hover {
+    border-color: var(--color-right);
+    background: color-mix(in srgb, var(--color-right) 12%, transparent);
+    color: var(--color-right);
+    font-weight: 600;
+  }
+
+  &[data-state="wrong"],
+  &[data-state="wrong"]:hover {
+    border-color: var(--color-wrong);
+    background: color-mix(in srgb, var(--color-wrong) 12%, transparent);
+    color: var(--color-wrong);
+  }
+
+  @media (forced-colors: active) {
+    &[data-state] {
+      border-width: 3px;
+    }
+  }
+}
+
+.explanation {
+  padding-inline-start: 1rem;
+  border-inline-start: 3px solid var(--color-wrong);
+  color: var(--color-text-body);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+
+  &[data-right="true"] {
+    border-inline-start-color: var(--color-right);
+  }
+
+  strong {
+    color: var(--color-heading);
+  }
+}
+
+.score {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  color: var(--color-text-soft);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.result {
+  color: var(--color-heading);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.again {
+  @include button("primary", 2.75rem);
+}

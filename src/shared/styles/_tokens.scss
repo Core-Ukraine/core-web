@@ -40,6 +40,19 @@
   --color-focus: #7fa6e6;
   --color-grid: rgb(127 166 230 / 0.07);
 
+  // Flows and parts of the reactor schemes
+  --color-flow-hot: #f07a5b;
+  --color-flow-cold: #7fa6e6;
+  --color-flow-water: #5db1da;
+  --color-flow-steam: #a9b8cf;
+  --color-flow-air: #7fc6a2;
+  --color-fuel: #e2b04f;
+
+  // Paper under the scanned drawings, and right and wrong answers
+  --color-paper: #e9eef6;
+  --color-right: #7fd3a2;
+  --color-wrong: #f19a84;
+
   // Glows, highlights and shadows that give the dark surfaces depth
   --color-glow-blue: rgb(41 98 186 / 0.32);
   --color-glow-red: rgb(227 2 32 / 0.45);

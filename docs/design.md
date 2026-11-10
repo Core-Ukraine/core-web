@@ -28,6 +28,15 @@ Every colour is a custom property from `colors` in `src/shared/styles/_tokens.sc
 | 🔲 `--color-hover`       | `#172846` | A menu item under the pointer or open                              |
 | 🔲 `--color-hover-panel` | `#1D2F52` | An item of a menu panel under the pointer                          |
 | ⬜ `--color-light-hover` | `#E2EAF7` | The white button under the pointer                                 |
+| 🟧 `--color-flow-hot`    | `#F07A5B` | Hot water in the schemes of the AP-1000 course                     |
+| 🟦 `--color-flow-cold`   | `#7FA6E6` | Cooled water                                                       |
+| 🟦 `--color-flow-water`  | `#5DB1DA` | Water from tanks, feed and cooling water                           |
+| ⬜ `--color-flow-steam`  | `#A9B8CF` | Steam                                                              |
+| 🟩 `--color-flow-air`    | `#7FC6A2` | Air around the containment                                         |
+| 🟨 `--color-fuel`        | `#E2B04F` | The core                                                           |
+| ⬜ `--color-paper`       | `#E9EEF6` | The sheet under the scanned NRC drawings                           |
+| 🟩 `--color-right`       | `#7FD3A2` | A right answer, a working unit                                     |
+| 🟧 `--color-wrong`       | `#F19A84` | A wrong answer, a stopped unit                                     |
 
 > [!IMPORTANT]
 > Red is only for actions and active states, never for small text: on the dark background it reads poorly. The brand blue is for fills; as a text colour on dark it is replaced by the light blue `--color-accent`.
@@ -75,6 +84,15 @@ The mark is a stylised hexagonal fuel assembly: the hexagon, six fuel rods aroun
 | ▍ Lead             | A 3 px red line on the left, a touch taken from the ES Group site         |                                                                                 |
 
 Every element has rounded corners of 8 to 16 px, and every hover stays inside the palette.
+
+### ⚛️ The course
+
+The AP-1000 course reuses the cards, the light button for a picked scenario and the red marks of the site, and adds a few pieces of its own:
+
+- 🧾 **Drawings on paper.** The scanned NRC drawings lie on `--color-paper` and blend into it with `mix-blend-mode: multiply`, so their white turns into the sheet and the dark page around them stays calm.
+- 📐 **Schemes.** The simplified unit and section are drawn in SVG with the flow colours above; flows move as dashes and stop for reduced motion. On a phone they shrink with the column and can be zoomed with two fingers.
+- 🔢 **Source numbers** in Martian Mono a size smaller, like footnotes; **terms** such as `PRHR` as light blue labels on a dark chip.
+- 📏 **Container queries.** Parts that sit side by side, such as the drawing and the list of positions, measure the column of the course (`@container course`) rather than the window, because the list of modules takes its own room beside them.
 
 ## 🧱 Tokens and mixins
 

@@ -91,6 +91,20 @@
   @include hide-in-print;
 }
 
+// The topics of the section at the end of a course, which has its own list beside it
+.after {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-inline-size: 45rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, var(--color-highlight), transparent 6rem), var(--color-surface);
+
+  @include hide-in-print;
+}
+
 .asideTitle {
   color: var(--color-text-muted);
   font-family: var(--font-mono);

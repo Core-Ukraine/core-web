@@ -47,7 +47,7 @@ test("can be used with the keyboard alone", async ({ page, browserName }) => {
   await expect(page.locator("main")).toBeFocused();
 });
 
-for (const path of ["/", "/istoriia/ukraina", "/pro-proiekt", "/nowhere"]) {
+for (const path of ["/", "/istoriia/ukraina", "/reaktory/ap-1000", "/pro-proiekt", "/nowhere"]) {
   test(`reflows at 320 pixels without scrolling sideways on ${path}`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 720 });
     await page.goto(path);

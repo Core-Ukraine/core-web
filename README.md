@@ -16,6 +16,7 @@ The website of **ЯДРО**, an educational portal about nuclear energy in Ukrai
 - 🧭 **Main menu**: a sticky bar of plain words: four sections open a list of topics with short descriptions, two pages open right away; the current one is brighter, the open one sits on a soft pill
 - 📱 **Phone menu**: a full-screen accordion behind a 48 px button that turns into a cross, one section open at a time
 - 📚 **Every page of the menu**: four section pages and ten topic pages, the project and the news, each with breadcrumbs; topics also lead to the topics before and after them, and sections to the other sections
+- ⚛️ **AP-1000 course**: nine modules with key figures, twelve NRC drawings that open full size, schemes with moving flows, a list of equipment to pick from, six accident scenarios, a timeline, the units in the world, videos, numbered sources and a test
 - 🗂️ **One catalog**: sections, topics and pages live in one typed file, so the menu, the cards, the footer, the sitemap and the share cards always agree
 - ♿ **Accessible**: WCAG AA contrast, a skip link, landmarks, real buttons and links, a modal phone menu, keyboard control and forced colours, checked with axe in every build
 - 🔎 **Search-friendly**: titles, descriptions, canonical links, a share card for every page, a sitemap, robots rules and JSON-LD with breadcrumbs

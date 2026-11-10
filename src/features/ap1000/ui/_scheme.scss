@@ -1,0 +1,80 @@
+// The look shared by the simplified schemes of the course
+
+// The colour of each kind of flow, by data-kind on a pipe or a legend line
+@mixin flow-colours($property) {
+  &[data-kind="hot"] {
+    #{$property}: var(--color-flow-hot);
+  }
+
+  &[data-kind="cold"] {
+    #{$property}: var(--color-flow-cold);
+  }
+
+  &[data-kind="steam"] {
+    #{$property}: var(--color-flow-steam);
+  }
+
+  &[data-kind="water"] {
+    #{$property}: var(--color-flow-water);
+  }
+
+  &[data-kind="air"] {
+    #{$property}: var(--color-flow-air);
+  }
+
+  &[data-kind="leak"] {
+    #{$property}: var(--color-red);
+  }
+}
+
+// A vessel drawn in a thin light line over the panel
+@mixin vessel {
+  fill: var(--color-panel);
+  stroke: var(--color-text-muted);
+  stroke-width: 1.6;
+}
+
+// A tank with water in it
+@mixin tank {
+  fill: color-mix(in srgb, var(--color-flow-water) 24%, var(--color-panel));
+  stroke: var(--color-text-muted);
+  stroke-width: 1.4;
+}
+
+// A pipe under its moving flow
+@mixin pipe {
+  fill: none;
+  stroke-linejoin: round;
+  stroke-width: 3.2;
+
+  @include flow-colours(stroke);
+}
+
+// Dashes that run along a pipe in the direction of the flow
+@mixin flow {
+  fill: none;
+  stroke-dasharray: 9 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3.4;
+
+  @include flow-colours(stroke);
+}
+
+// A small caption on a scheme
+@mixin caption {
+  fill: var(--color-text-muted);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+// The keyframes behind flow; each module that animates flows includes this once
+@mixin flow-keyframes {
+  // The dashes move by one period, so the loop never jumps
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -18;
+    }
+  }
+}

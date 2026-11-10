@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { COURSE, COURSE_PATH } from "@/features/ap1000/model/course";
+import Course from "@/features/ap1000/ui/Course/Course";
+import Facts from "@/features/ap1000/ui/Facts/Facts";
+import Rich from "@/features/ap1000/ui/Rich/Rich";
 import {
   findTopic,
   neighbours,
@@ -50,38 +54,64 @@ export const generateMetadata = async ({ params }: PageProps<"/[section]/[topic]
 const TopicPage = async ({ params }: PageProps<"/[section]/[topic]">) => {
   const { section, topic, sectionIndex, topicIndex, page } = await topicPage(params);
   const crumbs = trail({ title: section.title, href: sectionHref(section) }, { title: topic.title });
+  const meta = `Тема ${topicNumber(sectionIndex, topicIndex)} · ${section.title}`;
+  const sectionTitle = `Теми розділу «${section.title}»`;
+  const sectionTopics = (
+    <TopicLinks
+      links={section.topics.map((entry) => ({
+        href: topicHref(section, entry),
+        title: entry.title,
+        current: entry.slug === topic.slug,
+      }))}
+    />
+  );
+  const pager = <TopicPager {...neighbours(section, topic)} />;
   return (
     <>
       <JsonLd data={pageSchema(page, crumbs, siteUrl())} />
       <div className={styles.progress} aria-hidden="true" />
-      <PageHeader
-        crumbs={crumbs}
-        title={topic.title}
-        lead={`${topic.summary}.`}
-        meta={`Тема ${topicNumber(sectionIndex, topicIndex)} · ${section.title}`}
-      />
-      <div className={styles.body}>
-        <div className={styles.main}>
-          <article className={styles.article}>
-            {topicBody(topic).map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </article>
-          <TopicPager {...neighbours(section, topic)} />
-        </div>
-        <aside className={styles.aside} aria-labelledby="section-topics">
-          <h2 id="section-topics" className={styles.asideTitle}>
-            {`Теми розділу «${section.title}»`}
-          </h2>
-          <TopicLinks
-            links={section.topics.map((entry) => ({
-              href: topicHref(section, entry),
-              title: entry.title,
-              current: entry.slug === topic.slug,
-            }))}
-          />
-        </aside>
-      </div>
+      {page.path === COURSE_PATH ? (
+        <>
+          <PageHeader
+            crumbs={crumbs}
+            title={topic.title}
+            subtitle={COURSE.subtitle}
+            lead={<Rich text={COURSE.lead} />}
+            meta={`${meta} · ${COURSE.length}`}
+          >
+            <Facts />
+          </PageHeader>
+          <Course>
+            <section className={styles.after} aria-labelledby="section-topics">
+              <h2 id="section-topics" className={styles.asideTitle}>
+                {sectionTitle}
+              </h2>
+              {sectionTopics}
+            </section>
+            {pager}
+          </Course>
+        </>
+      ) : (
+        <>
+          <PageHeader crumbs={crumbs} title={topic.title} lead={`${topic.summary}.`} meta={meta} />
+          <div className={styles.body}>
+            <div className={styles.main}>
+              <article className={styles.article}>
+                {topicBody(topic).map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </article>
+              {pager}
+            </div>
+            <aside className={styles.aside} aria-labelledby="section-topics">
+              <h2 id="section-topics" className={styles.asideTitle}>
+                {sectionTitle}
+              </h2>
+              {sectionTopics}
+            </aside>
+          </div>
+        </>
+      )}
     </>
   );
 };

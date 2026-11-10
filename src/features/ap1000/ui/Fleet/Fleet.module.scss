@@ -1,0 +1,79 @@
+@use "@/shared/styles/mixins" as *;
+
+// The table keeps its columns on a phone and scrolls sideways instead
+.scroll {
+  overflow-x: auto;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+}
+
+.table {
+  inline-size: 100%;
+  min-inline-size: 46rem;
+  border-collapse: collapse;
+  color: var(--color-text-body);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+
+  th,
+  td {
+    padding: 0.75rem 1rem;
+    border-block-end: 1px solid var(--color-line);
+    text-align: start;
+    vertical-align: top;
+  }
+
+  thead th {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child > * {
+    border-block-end: 0;
+  }
+}
+
+.unit {
+  max-inline-size: 16rem;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.type {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+// The status as a small label in the colour of how the unit stands
+.status {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid currentcolor;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+
+  &[data-status="run"] {
+    color: var(--color-right);
+  }
+
+  &[data-status="build"] {
+    color: var(--color-accent);
+  }
+
+  &[data-status="plan"] {
+    color: var(--color-text-soft);
+  }
+
+  &[data-status="stop"] {
+    color: var(--color-wrong);
+  }
+}

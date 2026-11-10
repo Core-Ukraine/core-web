@@ -1,0 +1,92 @@
+@use "@/shared/styles/mixins" as *;
+@use "../scheme";
+
+.fold {
+  min-inline-size: 0;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, var(--color-highlight), transparent 6rem), var(--color-surface);
+  overflow: clip;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-block-size: 3.25rem;
+  padding: 0.75rem 1.25rem;
+  color: var(--color-text);
+  font-weight: 600;
+  line-height: 1.35;
+  list-style: none;
+  cursor: pointer;
+  transition: color var(--duration-fast) ease;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  @include hover {
+    color: var(--color-accent);
+  }
+}
+
+// The chevron points down while closed and up while open
+.chevron {
+  flex: none;
+  color: var(--color-red);
+  transition: rotate var(--duration-base) var(--ease-out);
+
+  .fold[open] & {
+    rotate: 180deg;
+  }
+
+  @media (forced-colors: active) {
+    color: ButtonText;
+  }
+}
+
+.foot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding: 0.875rem 1.25rem 1.125rem;
+  border-block-start: 1px solid var(--color-line);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  color: var(--color-text-soft);
+  font-size: 0.875rem;
+  list-style: none;
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+// A short line in the colour of the flow
+.line {
+  flex: none;
+  inline-size: 1.25rem;
+  block-size: 0.25rem;
+  border-radius: 0.125rem;
+
+  @include scheme.flow-colours(background-color);
+
+  @media (forced-colors: active) {
+    background-color: CanvasText;
+  }
+}
+
+.note {
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}

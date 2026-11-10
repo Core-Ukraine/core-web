@@ -6,6 +6,7 @@ export const PAGES = [
   "/osnovy",
   "/reaktory",
   "/reaktory/vver-1000",
+  "/reaktory/ap-1000",
   "/istoriia/ukraina",
   "/materialy/kreslennia",
   "/pro-proiekt",

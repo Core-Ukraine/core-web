@@ -23,4 +23,15 @@ describe("PageHeader", () => {
     const { container } = render(<PageHeader crumbs={[{ title: "Головна" }]} title="Сторінка" />);
     expect(container.querySelectorAll("p")).toHaveLength(0);
   });
+
+  it("adds a line under the title and more of the first screen", () => {
+    render(
+      <PageHeader crumbs={[{ title: "Головна" }]} title="AP-1000" subtitle="Реактор покоління III+">
+        <dl aria-label="Цифри" />
+      </PageHeader>,
+    );
+    expect(screen.getByRole("heading", { level: 1, name: "AP-1000" })).toBeInTheDocument();
+    expect(screen.getByText("Реактор покоління III+")).toBeInTheDocument();
+    expect(screen.getByLabelText("Цифри")).toBeInTheDocument();
+  });
 });

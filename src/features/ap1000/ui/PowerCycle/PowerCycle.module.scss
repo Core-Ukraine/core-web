@@ -1,0 +1,76 @@
+@use "@/shared/styles/mixins" as *;
+@use "../scheme";
+
+@include scheme.flow-keyframes;
+
+// The scheme shrinks with the column; a phone zooms in with two fingers
+.figure {
+  margin: 0;
+  border-block-start: 1px solid var(--color-line);
+  background: var(--color-bg-deep);
+}
+
+.scheme {
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.pipe {
+  @include scheme.pipe;
+}
+
+.flow {
+  @include scheme.flow;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: flow 1.2s linear infinite;
+  }
+}
+
+.vessel {
+  @include scheme.vessel;
+}
+
+.tank {
+  @include scheme.tank;
+}
+
+.core {
+  fill: var(--color-fuel);
+}
+
+.shaft {
+  stroke: var(--color-text-muted);
+  stroke-width: 3;
+}
+
+.name {
+  @include scheme.caption;
+
+  fill: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.caption {
+  @include scheme.caption;
+}
+
+// Lines and words keep their meaning in forced colours
+@media (forced-colors: active) {
+  .vessel,
+  .tank {
+    fill: Canvas;
+    stroke: CanvasText;
+  }
+
+  .pipe,
+  .flow {
+    stroke: CanvasText;
+  }
+
+  .name,
+  .caption {
+    fill: CanvasText;
+  }
+}

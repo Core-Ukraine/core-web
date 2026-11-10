@@ -8,7 +8,7 @@ Core Web is a Next.js 16 App Router site. Every page is prerendered at build tim
 flowchart TD
   App["🧭 app<br/>routes, metadata, special files"] --> Widgets["🧩 widgets<br/>Header, Footer, PageHeader, ErrorScreen"]
   App --> Features
-  Widgets --> Features["✨ features<br/>catalog, navigation, home, project, news, notifications, seo"]
+  Widgets --> Features["✨ features<br/>catalog, navigation, home, project, news, ap1000, notifications, seo"]
   Features --> Shared["🧰 shared<br/>lib, ui, styles, assets"]
   Widgets --> Shared
   App --> Shared
@@ -25,15 +25,16 @@ Oxlint enforces the directions with `no-restricted-imports` in `.oxlintrc.json`.
 
 ### ✨ Features
 
-| Feature            | `model/`                                                                                  | `ui/`                                                                   |
-| ------------------ | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| 🗂️ `catalog`       | `SECTIONS`, `PAGES`, the placeholder text, addresses, numbering, counts and reading order | `SectionCard`, `TopicCard`, `TopicLinks`, `TopicPager`, `OtherSections` |
-| 🧭 `navigation`    | `MENU` built from the catalog, `isWithin`, `currentGroup`, `trail`                        | `MainNav`, `MobileMenu`, `Breadcrumbs`                                  |
-| 🏠 `home`          | The texts of the home page and the fuel assembly lattice with its rings                   | `Hero`, `FuelAssembly`, `Overview`, `About`                             |
-| 👥 `project`       | The parts of the project page and the contacts                                            | `ProjectDetails`                                                        |
-| 📰 `news`          | `NEWS` and their order                                                                    | `NewsList`, `NewsBanner`                                                |
-| 📴 `notifications` | The self-contained offline page and its policy                                            | `OfflineNotice`, `ServiceWorker`                                        |
-| 🔎 `seo`           | Page metadata and JSON-LD; `og/` draws share cards and app icons                          | `JsonLd`                                                                |
+| Feature            | `model/`                                                                                  | `ui/`                                                                                      |
+| ------------------ | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| 🗂️ `catalog`       | `SECTIONS`, `PAGES`, the placeholder text, addresses, numbering, counts and reading order | `SectionCard`, `TopicCard`, `TopicLinks`, `TopicPager`, `OtherSections`                    |
+| 🧭 `navigation`    | `MENU` built from the catalog, `isWithin`, `currentGroup`, `trail`                        | `MainNav`, `MobileMenu`, `Breadcrumbs`                                                     |
+| 🏠 `home`          | The texts of the home page and the fuel assembly lattice with its rings                   | `Hero`, `FuelAssembly`, `Overview`, `About`                                                |
+| 👥 `project`       | The parts of the project page and the contacts                                            | `ProjectDetails`                                                                           |
+| 📰 `news`          | `NEWS` and their order                                                                    | `NewsList`, `NewsBanner`                                                                   |
+| ⚛️ `ap1000`        | The AP-1000 course: its modules, drawings, sources, scenarios, history, videos and quiz   | `Course`, `CourseNav`, `Article`, `Figure`, `PlantDiagram`, `Quiz` and the parts they show |
+| 📴 `notifications` | The self-contained offline page and its policy                                            | `OfflineNotice`, `ServiceWorker`                                                           |
+| 🔎 `seo`           | Page metadata and JSON-LD; `og/` draws share cards and app icons                          | `JsonLd`                                                                                   |
 
 ## 🖥️ Rendering
 
@@ -48,7 +49,7 @@ flowchart LR
 ```
 
 - 📄 **Static pages.** `[section]` and `[section]/[topic]` set `dynamicParams = false` and list their addresses with `generateStaticParams`, so an unknown slug is a `404` without any rendering.
-- 🧭 **Little client code.** Only the menus, the offline notice and the service worker registration are client components; everything else renders on the server at build time.
+- 🧭 **Little client code.** Only the menus, the offline notice, the service worker registration and the parts of the AP-1000 course a reader works with (the list of modules, the drawings that open full size, the pickers of positions and scenarios and the quiz) are client components; everything else renders on the server at build time. The pickers get their texts already rendered on the server and only switch which one is shown.
 - ⚛️ **React Compiler** memoizes the client components; there is no manual `useMemo` or `useCallback`.
 - 🔤 **Fonts** are served by the site itself. Unbounded comes from static files in `src/shared/assets/fonts` through `next/font/local`, split into a Cyrillic and a Latin part that are both preloaded; Montserrat and Martian Mono come from `next/font/google`, downloaded at build time. About 80 KB of fonts reach a page.
 - 🔀 **Page changes** go through React's `<ViewTransition>` in the root layout: Next.js navigations are transitions, so the browser cross-fades the content while the header and footer stay put. `data-scroll-behavior="smooth"` on `<html>` lets Next.js jump to the top of a new page instead of scrolling smoothly up to it.

@@ -1,0 +1,113 @@
+@use "@/shared/styles/mixins" as *;
+
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.title {
+  @include display(clamp(1.125rem, 1rem + 0.5vw, 1.3125rem));
+}
+
+.intro {
+  max-inline-size: 45rem;
+  color: var(--color-text-soft);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  list-style: none;
+}
+
+// A row: the play mark, the title with what it shows and the language
+.video {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 0.25rem 0.875rem;
+  padding: 0.875rem 1.125rem;
+
+  & + & {
+    border-block-start: 1px solid var(--color-line);
+  }
+
+  @include below("md") {
+    grid-template-columns: 2rem minmax(0, 1fr);
+
+    .language {
+      grid-column: 2;
+      justify-self: start;
+    }
+  }
+}
+
+// A red square with a triangle, the mark of a video
+.play {
+  display: grid;
+  place-items: center;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  margin-block-start: 0.0625rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-red);
+
+  &::after {
+    content: "";
+    margin-inline-start: 0.1875rem;
+    border-block: 0.375rem solid transparent;
+    border-inline-start: 0.5625rem solid #ffffff;
+  }
+
+  @media (forced-colors: active) {
+    border: 1px solid CanvasText;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-inline-size: 0;
+}
+
+.link {
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  text-decoration-color: var(--color-line-panel);
+  text-underline-offset: 0.2em;
+
+  @include hover {
+    color: var(--color-accent);
+  }
+}
+
+.description {
+  color: var(--color-text-soft);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.language {
+  padding: 0.0625rem 0.375rem;
+  border: 1px solid var(--color-line-panel);
+  border-radius: 0.3125rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}

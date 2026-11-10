@@ -1,0 +1,71 @@
+@use "@/shared/styles/mixins" as *;
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  border-inline-start: 2px solid var(--color-line-panel);
+  list-style: none;
+}
+
+// The date on the left, the event on the right, a node on the line
+.milestone {
+  position: relative;
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: 0.25rem 1.25rem;
+  padding: 0.75rem 0 0.75rem 1.5rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 1.125rem;
+    inset-inline-start: -0.4375rem;
+    inline-size: 0.75rem;
+    block-size: 0.75rem;
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    background: var(--color-bg);
+  }
+
+  // A turning point of the story
+  &[data-key="true"]::before {
+    border-color: var(--color-red);
+    background: var(--color-red);
+  }
+
+  @include below("md") {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  @media (forced-colors: active) {
+    &::before {
+      border-color: CanvasText;
+    }
+
+    &[data-key="true"]::before {
+      background: CanvasText;
+    }
+  }
+}
+
+.date {
+  padding-block-start: 0.1875rem;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.text {
+  max-inline-size: 42rem;
+  color: var(--color-text-body);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.title {
+  color: var(--color-heading);
+  font-weight: 600;
+}

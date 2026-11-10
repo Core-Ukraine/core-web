@@ -38,6 +38,7 @@ Vitest runs with `pool: "vmThreads"`: one jsdom per worker, and every test file 
 | 🗺️ `routing`       | The home page in Ukrainian, four kinds of missing addresses with `404`, the health check                                                   |
 | 🛡️ `security`      | No console errors or policy violations, the policy and headers, the offline page and icon policies                                         |
 | 🔎 `seo`           | Titles, canonical links, Open Graph, JSON-LD, the sitemap, robots, share cards, the manifest, security.txt                                 |
+| ⚛️ `course`        | A scenario switches its events and flows, a drawing opens and closes, a position and an answer, the module being read is marked            |
 | 📴 `offline`       | The notice when the connection drops and the offline page after a failed reload                                                            |
 | 🖼️ `visual`        | The home, a topic and the missing page in full, and the open phone menu                                                                    |
 | 🚦 `lighthouse`    | The budgets below                                                                                                                          |

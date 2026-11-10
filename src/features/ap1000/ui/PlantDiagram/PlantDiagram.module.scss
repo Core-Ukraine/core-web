@@ -1,0 +1,225 @@
+@use "@/shared/styles/mixins" as *;
+@use "../scheme";
+
+@include scheme.flow-keyframes;
+
+// The section shrinks with the column; a phone zooms in with two fingers
+.figure {
+  margin: 0;
+  border-block-start: 1px solid var(--color-line);
+  background: var(--color-bg-deep);
+}
+
+.plant {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.concrete {
+  fill: var(--color-line-panel);
+}
+
+.cavity {
+  fill: var(--color-line);
+}
+
+.ground {
+  stroke: var(--color-text-muted);
+  stroke-width: 1.2;
+}
+
+// The steel vessel, the wall that passes the heat out
+.steel {
+  fill: none;
+  stroke: var(--color-text-soft);
+  stroke-width: 3.5;
+}
+
+.baffle {
+  stroke: var(--color-text-muted);
+  stroke-dasharray: 4 3;
+  stroke-width: 1.2;
+}
+
+.vessel {
+  @include scheme.vessel;
+}
+
+.tank {
+  @include scheme.tank;
+}
+
+// The heat exchanger is only a bent bundle of tubes
+.tube {
+  fill: none;
+  stroke: var(--color-text-muted);
+  stroke-width: 5;
+}
+
+.core {
+  fill: var(--color-fuel);
+}
+
+.thin {
+  fill: none;
+  stroke: var(--color-text-muted);
+  stroke-width: 1;
+}
+
+.valve {
+  fill: var(--color-panel);
+  stroke: var(--color-text-soft);
+  stroke-width: 1.3;
+}
+
+.pipe {
+  @include scheme.pipe;
+
+  transition: opacity var(--duration-base) ease;
+}
+
+// Flows stay hidden until a scenario sets them moving
+.flow {
+  @include scheme.flow;
+
+  opacity: 0;
+}
+
+// Marks of a scenario: water on the floor, steam under the dome, a leak
+.flood,
+.cloud,
+.burst {
+  opacity: 0;
+  transition: opacity var(--duration-base) ease;
+}
+
+.flood {
+  fill: color-mix(in srgb, var(--color-flow-water) 26%, transparent);
+}
+
+.cloud {
+  fill: color-mix(in srgb, var(--color-flow-steam) 18%, transparent);
+}
+
+.burst {
+  fill: var(--color-red);
+}
+
+.flood,
+.cloud,
+.burst {
+  &[data-shown="true"] {
+    opacity: 1;
+  }
+}
+
+.caption {
+  @include scheme.caption;
+}
+
+// A position number in a circle with its leader line
+.callout {
+  pointer-events: none;
+
+  line {
+    stroke: var(--color-text-soft);
+    stroke-width: 1;
+  }
+
+  circle {
+    fill: var(--color-panel);
+    stroke: var(--color-text-soft);
+    stroke-width: 1.2;
+  }
+
+  text {
+    fill: var(--color-heading);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+}
+
+// A picked position or a part at work gets a bright outline
+.part[data-active="true"] {
+  .vessel,
+  .tank,
+  .valve {
+    fill: var(--color-hover-panel);
+    stroke: var(--color-heading);
+    stroke-width: 3;
+  }
+
+  .tube,
+  .steel {
+    stroke: var(--color-heading);
+  }
+
+  .concrete {
+    fill: color-mix(in srgb, var(--color-accent) 55%, var(--color-line-panel));
+  }
+
+  .core {
+    stroke: var(--color-heading);
+    stroke-width: 3;
+  }
+}
+
+// Positions answer the pointer where the section is a way to pick them
+.plant[data-pickable="true"] .part {
+  cursor: pointer;
+
+  @include hover {
+    .vessel,
+    .tank,
+    .valve {
+      stroke: var(--color-accent);
+    }
+  }
+}
+
+// In a scenario, idle pipes fade back and the working flows move
+.plant[data-mode="scenario"] {
+  .pipe {
+    opacity: 0.22;
+  }
+
+  .pipe[data-on="true"],
+  .flow[data-on="true"] {
+    opacity: 1;
+  }
+
+  .flow[data-on="true"] {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: flow 1.1s linear infinite;
+    }
+  }
+}
+
+// Lines and words keep their meaning in forced colours
+@media (forced-colors: active) {
+  .vessel,
+  .tank,
+  .valve {
+    fill: Canvas;
+    stroke: CanvasText;
+  }
+
+  .pipe,
+  .flow,
+  .steel {
+    stroke: CanvasText;
+  }
+
+  [data-active="true"] .vessel,
+  [data-active="true"] .tank,
+  [data-active="true"] .valve,
+  [data-active="true"] .steel {
+    stroke: Highlight;
+  }
+
+  .caption,
+  .callout text {
+    fill: CanvasText;
+  }
+}

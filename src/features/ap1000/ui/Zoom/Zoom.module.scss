@@ -1,0 +1,85 @@
+@use "@/shared/styles/mixins" as *;
+
+// The drawing lies on a sheet of paper, as it was printed
+.sheet {
+  display: block;
+  inline-size: 100%;
+  margin: 0;
+  padding: clamp(0.5rem, 2vw, 1rem);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-paper);
+  cursor: zoom-in;
+  transition:
+    border-color var(--duration-base) ease,
+    box-shadow var(--duration-base) var(--ease-out);
+
+  @include hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-card);
+  }
+
+  @media (forced-colors: active) {
+    border-color: ButtonText;
+  }
+}
+
+.dialog {
+  inline-size: min(96vw, 87.5rem);
+  max-inline-size: none;
+  max-block-size: 94svh;
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 1px solid var(--color-line-panel);
+  border-radius: var(--radius-xl);
+  background: var(--color-panel);
+  box-shadow: var(--shadow-panel);
+  color: var(--color-text);
+
+  &::backdrop {
+    background: rgb(7 15 28 / 0.82);
+  }
+}
+
+// The name of the drawing and the way out, which stay in view while it scrolls
+.bar {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.625rem 0.625rem 0.625rem 1.25rem;
+  border-block-end: 1px solid var(--color-line);
+  background: var(--color-panel);
+}
+
+.title {
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.close {
+  @include button("light", 2.75rem);
+
+  flex: none;
+  padding-inline: 1rem;
+  font-size: 0.9375rem;
+}
+
+.paper {
+  padding: clamp(0.5rem, 2vw, 1.25rem);
+  background: var(--color-paper);
+
+  img {
+    inline-size: 100%;
+    block-size: auto;
+    max-inline-size: 100rem;
+    margin-inline: auto;
+    mix-blend-mode: multiply;
+  }
+}

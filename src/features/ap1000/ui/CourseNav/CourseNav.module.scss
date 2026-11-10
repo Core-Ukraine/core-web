@@ -1,0 +1,114 @@
+@use "@/shared/styles/mixins" as *;
+
+// A card beside the course on a wide screen, a band of chips under the header on a phone
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  @include from("lg") {
+    padding: 1.5rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-xl);
+    background: linear-gradient(180deg, var(--color-highlight), transparent 6rem), var(--color-surface);
+  }
+}
+
+.title {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  text-transform: uppercase;
+
+  @include below("lg") {
+    @include visually-hidden;
+  }
+}
+
+.list {
+  position: relative;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include from("lg") {
+    flex-direction: column;
+  }
+
+  @include below("lg") {
+    gap: 0.375rem;
+    padding-block: 0.625rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+}
+
+// A module of the list; the one being read is marked in red and white
+.link {
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  color: var(--color-text-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-decoration: none;
+  transition:
+    color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease;
+
+  @include hover {
+    color: var(--color-heading);
+  }
+
+  &[aria-current] {
+    color: var(--color-heading);
+    font-weight: 600;
+  }
+
+  @include from("lg") {
+    min-block-size: 2.5rem;
+    padding: 0.5rem 0.75rem;
+    border-inline-start: 2px solid var(--color-line);
+
+    &[aria-current] {
+      border-inline-start-color: var(--color-red);
+      background: var(--color-hover);
+    }
+  }
+
+  @include below("lg") {
+    align-items: center;
+    min-block-size: 2.5rem;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid var(--color-line-panel);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    white-space: nowrap;
+
+    &[aria-current] {
+      border-color: var(--color-red);
+      background: var(--color-hover-panel);
+    }
+  }
+
+  @media (forced-colors: active) {
+    &[aria-current] {
+      border-color: Highlight;
+    }
+  }
+}
+
+.number {
+  flex: none;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+}

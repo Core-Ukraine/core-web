@@ -7,18 +7,19 @@ Every text of the site lives in the repository as TypeScript, next to the code t
 
 ## 📍 Where each text lives
 
-| Text                                                          | File                                                          |
-| ------------------------------------------------------------- | ------------------------------------------------------------- |
-| 🗂️ Sections, topics, their descriptions and topic texts       | `src/features/catalog/model/catalog.ts`                       |
-| 👥 The names of **Про проєкт** and **Новини** and their lines | `PAGES` in `src/features/catalog/model/catalog.ts`            |
-| 🏠 The first screen, the section hint and **Про що цей сайт** | `src/features/home/model/home.ts`                             |
-| 🖼️ The label, legend and caption of the drawing               | `FIGURE` in `src/features/home/model/home.ts`                 |
-| 👥 The parts of the project page and the contacts             | `src/features/project/model/project.ts`                       |
-| 📰 The news                                                   | `src/features/news/model/news.ts`                             |
-| 📰 The title of the news band and the empty news page         | `NewsBanner.tsx` and `NewsList.tsx` in `src/features/news/ui` |
-| 🦶 The sentence about the portal in the footer                | `src/widgets/Footer/Footer.tsx`                               |
-| 🔎 The name, title, description and keywords of the site      | `src/shared/lib/site.ts`                                      |
-| 🖼️ The words on the home share card                           | `src/app/opengraph-image.tsx`                                 |
+| Text                                                          | File                                                           |
+| ------------------------------------------------------------- | -------------------------------------------------------------- |
+| 🗂️ Sections, topics, their descriptions and topic texts       | `src/features/catalog/model/catalog.ts`                        |
+| 👥 The names of **Про проєкт** and **Новини** and their lines | `PAGES` in `src/features/catalog/model/catalog.ts`             |
+| 🏠 The first screen, the section hint and **Про що цей сайт** | `src/features/home/model/home.ts`                              |
+| 🖼️ The label, legend and caption of the drawing               | `FIGURE` in `src/features/home/model/home.ts`                  |
+| 👥 The parts of the project page and the contacts             | `src/features/project/model/project.ts`                        |
+| 📰 The news                                                   | `src/features/news/model/news.ts`                              |
+| 📰 The title of the news band and the empty news page         | `NewsBanner.tsx` and `NewsList.tsx` in `src/features/news/ui`  |
+| 🦶 The sentence about the portal in the footer                | `src/widgets/Footer/Footer.tsx`                                |
+| 🔎 The name, title, description and keywords of the site      | `src/shared/lib/site.ts`                                       |
+| 🖼️ The words on the home share card                           | `src/app/opengraph-image.tsx`                                  |
+| ⚛️ The AP-1000 course                                         | `src/features/ap1000/model`, see [below](#-the-ap-1000-course) |
 
 ### 🧾 Placeholders today
 
@@ -67,6 +68,32 @@ Give the topic a `body`: one string per paragraph. The placeholder disappears as
 3. Update the expectations that count pages: the sitemap test, `e2e/seo.spec.ts` and the navigation map in [Features](./features.md).
 
 A new section works the same way. The menu shows it as one more list; keep the menu at four lists and two links if possible, because the bar is designed for that width.
+
+## ⚛️ The AP-1000 course
+
+The course on `/reaktory/ap-1000` keeps its texts in `src/features/ap1000/model`, one file per kind:
+
+| File           | Holds                                                                                         |
+| -------------- | --------------------------------------------------------------------------------------------- |
+| `course.ts`    | The line under the title, the lead, the plate of figures, the parameters and the nine modules |
+| `positions.ts` | The fourteen positions of the section with their numbers and drawings                         |
+| `scenarios.ts` | The six accident scenarios: summary, drawings with notes, steps and videos                    |
+| `history.ts`   | The timeline, the three counts and the table of units                                         |
+| `videos.ts`    | The four groups of videos                                                                     |
+| `sources.ts`   | The thirty-eight sources in four groups                                                       |
+| `quiz.ts`      | The eight questions with the right answer and the explanation                                 |
+| `figures.ts`   | The captions and labels of the twelve NRC drawings in `src/features/ap1000/assets`            |
+| `plant.ts`     | The pipes, positions and scenario flows of the simplified section                             |
+
+A module is a list of blocks: text, a heading, a drawing, the labels of a drawing, a chain of stages, or a part with its own data such as the timeline or the quiz. Inside a text, two marks are set apart:
+
+- `[4]` or `[4,21]` puts the numbers of sources after a sentence; the number is the position in `SOURCES`.
+- `` `PRHR` `` sets the name of a system as a technical label.
+
+Spaces inside numbers such as `3 400` and before `°C` and `%` become non-breaking on their own. `course.test.ts` checks that every number points to a source, every drawing exists and every scenario has its flows on the section.
+
+> [!NOTE]
+> The text came with em and en dashes. Following the writing rules below, a dash between parts of a sentence became a colon or a comma, and a range of numbers such as `1-3` took a hyphen.
 
 ## 📰 Adding news
 

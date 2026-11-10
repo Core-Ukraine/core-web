@@ -52,6 +52,24 @@ Each section page has breadcrumbs, the name, the description from the catalog wi
 
 A topic page shows breadcrumbs back to its section, the name, the short description, a note such as **ТЕМА 02.1 · РЕАКТОРИ** and the text of the topic. Until a topic has its own text, it shows three placeholder paragraphs. Under the text, **Попередня тема** and **Наступна тема** follow the reading order of the whole site, across sections. Beside the text, or under it on narrow screens, **Теми розділу** lists every topic of the section with the current one highlighted and stays in view while a long text scrolls. A thin line at the top of the window fills while the page is read.
 
+### ⚛️ The AP-1000 course
+
+`/reaktory/ap-1000` is not a few paragraphs but a mini course of nine modules: the introduction, the design of the unit, how it works, the safety systems, the history, the units in the world, videos, sources and a test. Under the title it shows a line on what the reactor is, the lead with its sources, the note **ТЕМА 02.3 · РЕАКТОРИ · МІНІ-КУРС · 9 МОДУЛІВ · ПРИБЛИЗНО 40 ХВИЛИН** and a plate of five key figures.
+
+| Part                      | What the reader gets                                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 🧭 **Модулі курсу**       | A card beside the course on a wide screen, a band of chips under the header on a phone; the module being read is marked                          |
+| 🔢 Source numbers         | Small numbers after a sentence, each a link to its source in a new tab                                                                           |
+| 🖼️ NRC drawings           | Twelve drawings on paper with Ukrainian captions and labels; a click opens one full size over the page, Escape or **Закрити** closes it          |
+| 📐 Simplified schemes     | The unit from the reactor to the generator with moving flows, and a section of the plant with fourteen numbered positions                        |
+| 🔩 **Перелік обладнання** | Pick a position in the list or on the section to read about it, see its numbers and its own NRC drawing                                          |
+| 🚨 **Аварійні сценарії**  | Six scenarios, each with its NRC drawings, its events step by step, its videos and its flows on the section                                      |
+| 🗓️ History and units      | A timeline with the turning points in red and a table of every unit with its status                                                              |
+| 🎬 Videos and sources     | Four groups of videos and thirty-eight numbered sources                                                                                          |
+| ✅ **Перевірка знань**    | Eight questions: the first answer counts, the right one turns green, a wrong one coral, an explanation follows and the score is shown at the end |
+
+**Теми розділу** and the topics before and after close the course, since its own list of modules stands beside it.
+
 ## 👥 Project and 📰 news
 
 - **Про проєкт** has five numbered parts: the goal, what the site holds, the team, the history of the project and the contacts. The contacts have the anchor `#zviazok`, which the **Написати нам** link of the footer opens.

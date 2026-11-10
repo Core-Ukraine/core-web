@@ -16,6 +16,13 @@
   padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 6.5vw, 5rem);
 }
 
+// The title with the line that says what it is
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
 .title {
   @include display(clamp(1.75rem, 1rem + 2.6vw, 2.75rem));
 
@@ -24,6 +31,14 @@
   letter-spacing: -0.01em;
   overflow-wrap: break-word;
   hyphens: auto;
+}
+
+.subtitle {
+  max-inline-size: 40rem;
+  color: var(--color-text-soft);
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  font-weight: 600;
+  line-height: 1.45;
 }
 
 .lead {
